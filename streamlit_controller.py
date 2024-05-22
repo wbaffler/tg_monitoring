@@ -28,7 +28,8 @@ class Controller(object):
         date_min = date_max - timedelta(days=int(period))
         scraping_tg = scraping.Scraping(config.username, config.api_id, config.api_hash)
         print(self.channel)
-        data = asyncio.run(scraping_tg.tg_scraping(self.channel, date_max.replace(tzinfo=timezone.utc), date_min.replace(tzinfo=timezone.utc), self.key_word))
+        data = asyncio.run(scraping_tg.tg_scraping(self.channel, date_max.replace(tzinfo=timezone.utc), 
+                                                   date_min.replace(tzinfo=timezone.utc), self.key_word))
         self.data = data
         df = pd.DataFrame(data)
         if not df.empty:
@@ -68,7 +69,7 @@ class Controller(object):
 
 
     def set_schedule_sendin_email(self, period, receiver, key_word, channel, smtp_password, smtp_username, smtp_server):
-        schedule.every(30).seconds.do(self.__form_excel, period, receiver, key_word, channel, smtp_password, smtp_username, smtp_server)
+        schedule.every(period).days.do(self.__form_excel, period, receiver, key_word, channel, smtp_password, smtp_username, smtp_server)
         while True and not self.stopped:
             schedule.run_pending()
             time.sleep(1)

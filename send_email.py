@@ -18,8 +18,8 @@ class SendEmail(object):
     def send(self, sender, receiver, filename):
         # Создание сообщения
         msg = MIMEMultipart()
-        msg['From'] = sender #'agiiv00@ya.ru'
-        msg['To'] = receiver #'agiev29@gmail.com'
+        msg['From'] = sender
+        msg['To'] = receiver 
         msg['Subject'] = 'Отчет по мониторингу Telegram-канала'
 
         # Текст письма

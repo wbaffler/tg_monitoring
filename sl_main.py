@@ -67,12 +67,11 @@ def start_tracking():
     smtp_password = st.sidebar.text_input("SMTP Password", config.smtp_password, type="password")
     receiver = st.sidebar.text_input("Receiver Email", config.receiver)
     period_options = [7, 14, 30]
-    period = st.sidebar.selectbox("Выберите периодичность формирование отчета (в днях):", period_options)
+    period = st.sidebar.selectbox("Выберите периодичность формирования отчета (в днях):", period_options)
 
     if st.sidebar.button("Старт"):
-        print('in')
         thread = TrackingThread(receiver, period, key_word, channel, smtp_password, smtp_username, smtp_server)
-        print(thread, 'start')
+
         thread.start()
 
         st.session_state.tracking_threads.append(thread)
@@ -80,7 +79,6 @@ def start_tracking():
         index = len(st.session_state.tracking_threads) - 1
         display_tracking_info_element(index, thread)
 
-        # st.experimental_rerun()
 
 def stop_tracking(index):
     thread = st.session_state.tracking_threads.pop(index)
@@ -97,16 +95,16 @@ def one_time_analysis():
 
 
 st.title("Сервис по мониторингу Telegram-каналов")
-channel = st.sidebar.text_input("Telegram-канал", "@tass_agency")
+channel = st.sidebar.text_input("Telegram-канал", "@rbc_news")
 key_word = st.sidebar.text_input("Ключевое слово", "Яндекс")
 controller = streamlit_controller.Controller(channel, key_word)
 
 
-option = st.sidebar.radio("Выберите действие:", ("Автоотправка отчетов", "Мониторинг"))
+option = st.sidebar.radio("Выберите действие:", ("Задать автоотправку отчетов", "Сформировать текущий отчет"))
 
-if option == "Автоотправка отчетов":
+if option == "Задать автоотправку отчетов":
     display_tracking_info()
     start_tracking()
-elif option == "Мониторинг":
+elif option == "Сформировать текущий отчет":
     one_time_analysis()
 

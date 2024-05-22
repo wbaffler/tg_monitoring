@@ -38,15 +38,7 @@ class FormXlsx(object):
             img = Image(f'temp/visualisation.png')
             img.width = 1440
             img.height = 1000
-            # img2 = Image(f"temp/fig1.png")
-            # img2.width = 800
-            # img2.height = 600
-            # img3 = Image(f"temp/fig2.png")
-            # img3.width = 800
-            # img3.height = 600
             sheet.add_image(img, 'A1')
-            # sheet.add_image(img2, 'A10')
-            # sheet.add_image(img3, 'A20')
             
             '''Формирование страницы с таблицей публикаций'''
             table_sheet = workbook.create_sheet('Таблица публикаций')

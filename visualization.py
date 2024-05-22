@@ -91,7 +91,6 @@ class Visualization(object):
         ax.set_xlabel('Номер публикации')
         ax.set_ylabel('Количество реакций')
 
-        # count_of_emojies = 
         values = np.asarray(list(self.result_dict.values()))
         ratio_values = values / np.sum(values, axis=0) * 100
 
@@ -157,9 +156,6 @@ class Visualization(object):
 
     def save_imgs(self, fig1, fig2):
         plt.savefig(f'temp/visualisations.png')
-        print(fig1, fig2)
-        # fig1.write_image(f"temp/fig1.png")
-        # fig2.write_image(f"temp/fig2.png")
 
 
 
